@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui"
+      >
+    <h:head>
+    	<h:outputStylesheet library="css" name="table-style.css"  />
+    </h:head>
+    <h:body>
+    	
+    	<h1>Модель инфляции</h1>
+
+		<h:form id="form1">
+    	
+    		<h:dataTable value="#{model.exogenList}" var="o"
+    			styleClass="order-table"
+    			headerClass="order-table-header"
+    			rowClasses="order-table-odd-row,order-table-even-row" 	id="input" 	>
+
+    			<h:column>
+    				<!-- column header -->
+    				<f:facet name="header">Дата</f:facet>
+    				<!-- row record -->
+					#{o.date}
+    			</h:column>
+    			
+    			<h:column>
+    				<f:facet name="header">Курс доллара (dollar)</f:facet>
+					<h:inputText size="4" value="#{o.dollar}" />
+    			</h:column>
+
+				<h:column>
+					<f:facet name="header">Цена за нефть (Oil)</f:facet>
+					<h:inputText size="4" value="#{o.oil}" />
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Цена за газ (Gas)</f:facet>
+					<h:inputText size="4" value="#{o.gas}" />
+				</h:column>
+
+    		</h:dataTable>
+
+			<br></br>
+
+			<h:commandButton value="Рассчитать"  type="submit" action="#{model.calc}">
+				<f:ajax execute="@form" render="output"/>
+			</h:commandButton>
+
+			<h:commandButton value="Восстановить начальные значения"  type="reset">
+			</h:commandButton>
+
+			<br></br>
+			<br></br>
+
+			<h:dataTable value="#{model.endogenList}" var="e"
+						 styleClass="order-table"
+						 headerClass="order-table-header"
+						 rowClasses="order-table-odd-row,order-table-even-row"  id="output" >
+
+				<h:column>
+					<!-- column header -->
+					<f:facet name="header">Дата</f:facet>
+					<!-- row record -->
+					#{e.date}
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Темп инфляции на потребительском рынке</f:facet>
+					<h:outputFormat value="#{e.pi}" >
+						<f:convertNumber type="number" groupingUsed="true" minFractionDigits="2" pattern="#0.00"/>
+					</h:outputFormat>
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Темп изменения цен в промышленности</f:facet>
+					<h:outputFormat value="#{e.pippi}" >
+						<f:convertNumber type="number" groupingUsed="true" minFractionDigits="2" pattern="#0.00"/>
+					</h:outputFormat>
+			</h:column>
+
+			</h:dataTable>
+
+		</h:form>
+    </h:body>
+
+
+
+		
+</html>

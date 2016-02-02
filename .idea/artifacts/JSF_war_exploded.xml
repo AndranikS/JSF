@@ -1,0 +1,17 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" build-on-make="true" name="JSF:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/JSF_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="JSF" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="Mojarra-2.2.1" />
+          <element id="library" level="project" name="PrimeFaces-5.2" />
+        </element>
+      </element>
+      <element id="javaee-facet-resources" facet="JSF/web/Web" />
+    </root>
+  </artifact>
+</component>
